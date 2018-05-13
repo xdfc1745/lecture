@@ -1,0 +1,39 @@
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "apmsetup";
+
+  $connect = mysql_connect($servername, $username, $password);
+  if ($connect->connect_error) {
+    die("connection failed : ".$connect->connect_error);
+  }
+
+  $db_name = "customer";
+  $db_selector = mysql_select_db($db_name, $connect);
+
+  $table_name = "cust";
+  $query = "select * from ".$table_name;
+  $result = mysql_query($query, $connect);
+
+  if (empty($result))
+    echo "there is no table name : ".$table_name."<br>";
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>cust sign up</title>
+  </head>
+  <body>
+    <header>
+      <h3>customer sign up page</h3><hr>
+    </header>
+    <main>
+      <form class="set_id" action="id_valid.php" method="post">
+        ID : <input type="text" name="id_input">
+        <input type="submit" name="id_valid_check" value="검사" onclick="valid()">
+      </form>
+    </main>
+  </body>
+</html>
